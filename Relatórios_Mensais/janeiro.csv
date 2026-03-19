@@ -1,0 +1,6 @@
+﻿ID_Cliente,Produto,Preço,Quantidade,Data
+101,Notebook,"R$ 3.500,00",2,15/01/2024
+102,Mouse,89.9,5,2024-01-16
+103,Teclado,"199,00",3,18/01/2024
+104,Monitor,1200.0,1,2024-01-20
+999,Headset,,2,2024-01-22

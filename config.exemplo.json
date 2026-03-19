@@ -1,0 +1,7 @@
+{
+  "input_dir": "Relatórios_Mensais",
+  "clientes_xlsx": "Base_Clientes.xlsx",
+  "output_xlsx": "Relatorio_Consolidado.xlsx",
+  "log_level": "INFO",
+  "log_file": "logs\\automacao.log"
+}

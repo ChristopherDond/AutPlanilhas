@@ -1,0 +1,42 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+ENV/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Generated reports (keep sample, ignore user-generated)
+Relatorio_Consolidado.xlsx
+
+# Temporary files
+*.tmp
+*.temp
+~$*.xlsx
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# User config (keep example only)
+config.json
