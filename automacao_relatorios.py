@@ -140,14 +140,27 @@ def _parse_money_series(s: pd.Series) -> pd.Series:
 
 
 def _read_csv_robusto(path: Path) -> pd.DataFrame:
-    # Tenta auto-detecção de separador; cai para ; ou , se necessário.
+    # Prioriza engine C (mais rápida) com separadores comuns e usa auto-detecção como fallback.
     encodings = ["utf-8-sig", "utf-8", "latin1"]
+    common_separators = [";", ",", "\t"]
     last_err: Optional[Exception] = None
+
     for enc in encodings:
+        for sep in common_separators:
+            try:
+                df = pd.read_csv(path, encoding=enc, sep=sep)
+                # Quando o separador está errado, é comum todas as colunas ficarem em um único header.
+                if len(df.columns) == 1 and any(d in str(df.columns[0]) for d in common_separators):
+                    continue
+                return df
+            except Exception as e:
+                last_err = e
+
         try:
             return pd.read_csv(path, encoding=enc, sep=None, engine="python")
         except Exception as e:
             last_err = e
+
     raise last_err  # type: ignore[misc]
 
 
@@ -282,8 +295,9 @@ def calcular_kpis(df: pd.DataFrame) -> Dict[str, Any]:
 
 def _autosize_columns(worksheet, df: pd.DataFrame, max_width: int = 45):
     for i, col in enumerate(df.columns):
-        series = df[col].astype(str)
-        width = max(len(str(col)), int(series.map(len).max() if len(series) else 0)) + 2
+        series = df[col].fillna("").astype(str)
+        max_value_len = int(series.str.len().max()) if len(series) else 0
+        width = max(len(str(col)), max_value_len) + 2
         worksheet.set_column(i, i, min(width, max_width))
 
 
