@@ -1,3 +1,5 @@
+[Leia em Português (Brasil)](README-pt-br.md)
+
 # 📊 AutPlanilhas — Sales Report Automation
 
 A professional-grade Python tool that consolidates monthly sales CSVs, enriches them with customer data, and generates polished Excel reports with charts and KPIs.
